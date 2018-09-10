@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -18,7 +19,7 @@ import javax.swing.JTextField;
  * @author Asael
  */
 public class AdministradorSistemaUI extends javax.swing.JFrame {
-
+    
     public JButton getBtnActualizarP() {
         return btnActualizarP;
     }
@@ -109,6 +110,18 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
 
     public JTextField getTxtNombreUsuario() {
         return txtNombreUsuario;
+    }
+
+    public JTable getTblProyectos() {
+        return tblProyectos;
+    }
+
+    public JTable getTblTipoCaso() {
+        return tblTipoCaso;
+    }
+
+    public JTable getTblUsuario() {
+        return tblUsuario;
     }
 
     
@@ -221,13 +234,33 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsuarioMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblUsuario);
 
         btnAgregarU.setText("Agregar");
+        btnAgregarU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarUActionPerformed(evt);
+            }
+        });
 
         btnActualizarU.setText("Actualizar");
+        btnActualizarU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarUActionPerformed(evt);
+            }
+        });
 
         btnEliminarU.setText("Elimnar");
+        btnEliminarU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarUActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dialogUsuarioLayout = new javax.swing.GroupLayout(dialogUsuario.getContentPane());
         dialogUsuario.getContentPane().setLayout(dialogUsuarioLayout);
@@ -534,6 +567,22 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
     private void itemUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemUsuarioActionPerformed
         ControladorUI.itemAgregarUser();
     }//GEN-LAST:event_itemUsuarioActionPerformed
+
+    private void btnAgregarUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUActionPerformed
+        ControladorUI.btnAgregarUser();
+    }//GEN-LAST:event_btnAgregarUActionPerformed
+
+    private void btnActualizarUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarUActionPerformed
+        ControladorUI.btnActualizarUser();
+    }//GEN-LAST:event_btnActualizarUActionPerformed
+
+    private void btnEliminarUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUActionPerformed
+        ControladorUI.btnEliminarUser();
+    }//GEN-LAST:event_btnEliminarUActionPerformed
+
+    private void tblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuarioMouseClicked
+        ControladorUI.tblMouseClicked();
+    }//GEN-LAST:event_tblUsuarioMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarP;

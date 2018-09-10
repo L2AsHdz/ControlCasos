@@ -12,18 +12,16 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String dpi, String nombre, String tipoN) {
+    public Usuario(String dpi, String nombre, int tipo) {
         this.dpi = dpi;
         this.nombre = nombre;
-        this.tipoN = tipoN;
-        this.setTipo();
+        this.tipo = tipo;
     }
 
-    public Usuario(String dpi, String nombre, String nombreUsuarioS, String password, String tipoN) {
+    public Usuario(String dpi, String nombre, String nombreUsuarioS, String password, int tipo) {
         this.dpi = dpi;
         this.nombre = nombre;
-        this.tipoN = tipoN;
-        this.setTipo();
+        this.tipo = tipo;
         this.nombreUsuarioS = nombreUsuarioS;
         this.password = password;
     }
@@ -52,28 +50,24 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-    public void setTipo(String tipoN) {
-        switch (tipoN) {
-            case "Administrador Sistema":
-                this.tipo = 1;
+    public String getTipoN() {
+        return tipoN;
+    }
+    
+    public void setTipoN() {
+        switch (tipo) {
+            case 1:
+                this.tipoN = "Administrador Sistema";
                 break;
-            case "Administrador Proyecto":
-                this.tipo = 2;
+            case 2:
+                this.tipoN = "Administrador Proyecto";
                 break;
-            case "Desarrollador":
-                this.tipo = 3;
+            case 3:
+                this.tipoN = "Desarrollador";
                 break;
             default:
                 break;
         }
-    }
-
-    public String getTipoN() {
-        return tipoN;
-    }
-
-    public void setTipoN(String tipoN) {
-        this.tipoN = tipoN;
     }
 
     public String getNombreUsuarioS() {

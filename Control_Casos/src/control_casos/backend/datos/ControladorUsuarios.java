@@ -29,6 +29,7 @@ public class ControladorUsuarios {
             return true;
         } catch (SQLException ex) {
             System.out.println("No se inserto registro");
+            ex.printStackTrace();
             return false;
         }
 
@@ -56,6 +57,65 @@ public class ControladorUsuarios {
             System.out.println("Fallo metodo read");
         }
         return lista;
+    }
+    
+    public boolean delete(String dpi) {
+        try {
+            String sql = "DELETE FROM USUARIO WHERE DPI = ?";
+            PreparedStatement ps = CBD.conectar().prepareStatement(sql);
+            ps.setString(1, dpi);
+            ps.execute();
+            ps.close();
+            ps = null;
+            CBD.desconectar();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("No se elimino registro");
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean actualizar(Usuario u) {
+        try {
+            String sql = "UPDATE USUARIO SET Nombre = ?, Tipo = ?, Nombre_Usuario = ?, Password = ? WHERE DPI = ?";
+            PreparedStatement ps = CBD.conectar().prepareStatement(sql);
+            ps.setString(1, u.getNombre());
+            ps.setInt(2, u.getTipo());
+            ps.setString(3, u.getNombreUsuarioS());
+            ps.setString(4, u.getPassword());
+            ps.setString(5, u.getDpi());
+            ps.execute();
+            ps.close();
+            ps=null;
+            CBD.desconectar();
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }        
+    }
+    
+     public Usuario leerUsuarioFila(String dpi) {
+       Usuario u = new Usuario();
+        try {
+            String sql = "SELECT * FROM USUARIO WHERE DPI = ?";
+            PreparedStatement ps = CBD.conectar().prepareStatement(sql);
+            ps.setString(1, dpi);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                u.setDpi(rs.getString("DPI"));
+                u.setNombre(rs.getString("Nombre"));
+                u.setTipo(rs.getInt("Tipo"));
+                u.setNombreUsuarioS(rs.getString("Nombre_Usuario"));
+                u.setPassword(rs.getString("Password"));
+            }
+            ps.close();
+            ps = null;
+            CBD.desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Fallo metodo read prodcuto");
+        }
+        return u;
     }
     
     public int verificarUsuario(ArrayList<Usuario> users, String nombre, String password){
