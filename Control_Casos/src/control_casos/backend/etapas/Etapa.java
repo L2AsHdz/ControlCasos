@@ -6,6 +6,7 @@ public class Etapa {
     private String descripcion;
     private int estado;
     private String comentarioFinal;
+    private String comentarioRechazo;
     private double costoHora;
     private double horasTrabajadas;
     private int idProyecto;
@@ -62,6 +63,14 @@ public class Etapa {
 
     public void setComentarioFinal(String comentarioFinal) {
         this.comentarioFinal = comentarioFinal;
+    }
+    
+    public String getComentarioRechazo() {
+        return comentarioRechazo;
+    }
+
+    public void setComentarioRechazo(String comentarioRechazo) {
+        this.comentarioRechazo = comentarioRechazo;
     }
 
     public double getCostoHora() {

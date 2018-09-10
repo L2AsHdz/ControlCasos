@@ -9,6 +9,6 @@ package control_casos.backend.datos;
  *
  * @author Asael
  */
-public class ControladorBaseDatos {
+public class ControladorEtapas {
     
 }
