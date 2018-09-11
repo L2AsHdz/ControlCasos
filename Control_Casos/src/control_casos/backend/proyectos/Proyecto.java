@@ -5,15 +5,24 @@ public class Proyecto {
     private String nombre;
     private String descripcion;
     private int estado;
+    private String estadoN;
     private int numeroCasos;
     private String dpiAdminP;
+    private String nombreAdminP;
 
     public Proyecto() {
     }
 
-    public Proyecto(int id, String nombre, int estado, String dpiAdminP) {
+    public Proyecto(String nombre, String descripcion, String dpiAdminP) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.dpiAdminP = dpiAdminP;
+    }
+
+    public Proyecto(int id, String nombre, String descripcion, int estado, String dpiAdminP) {
         this.id = id;
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.estado = estado;
         this.dpiAdminP = dpiAdminP;
     }
@@ -50,6 +59,30 @@ public class Proyecto {
         this.estado = estado;
     }
 
+    public String getEstadoN() {
+        return estadoN;
+    }
+
+    public void setEstadoN() {
+        switch (estado) {
+            case 1:
+                this.estadoN = "Sin Casos";
+                break;
+            case 2:
+                this.estadoN = "Activo";
+                break;
+            case 3:
+                this.estadoN = "Inactivo";
+                break;
+                
+            case 4:
+                this.estadoN = "Finalizado";
+                break;
+            default:
+                break;
+        }
+    }
+
     public int getNumeroCasos() {
         return numeroCasos;
     }
@@ -64,6 +97,14 @@ public class Proyecto {
 
     public void setDpiAdminP(String dpiAdminP) {
         this.dpiAdminP = dpiAdminP;
+    }
+
+    public String getNombreAdminP() {
+        return nombreAdminP;
+    }
+
+    public void setNombreAdminP(String nombreAdminP) {
+        this.nombreAdminP = nombreAdminP;
     }
     
 }

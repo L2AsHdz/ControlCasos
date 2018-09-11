@@ -13,6 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -42,10 +43,6 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
 
     public JButton getBtnAgregarU() {
         return btnAgregarU;
-    }
-
-    public JButton getBtnCambiarAdmin() {
-        return btnCambiarAdmin;
     }
 
     public JButton getBtnEliminarTC() {
@@ -155,6 +152,8 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
         btnAgregarU = new javax.swing.JButton();
         btnActualizarU = new javax.swing.JButton();
         btnEliminarU = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         dialogProyecto = new javax.swing.JDialog();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -166,19 +165,22 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
         btnAgregarP = new javax.swing.JButton();
         btnActualizarP = new javax.swing.JButton();
         btnElimnarP = new javax.swing.JButton();
-        btnCambiarAdmin = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblProyectos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        btnLimpiarProyecto = new javax.swing.JButton();
         dialogTipoCaso = new javax.swing.JDialog();
         jLabel9 = new javax.swing.JLabel();
         txtNombreTC = new javax.swing.JTextField();
-        txtCantEtapas = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         btnAgregarTC = new javax.swing.JButton();
         btnActualizarTC = new javax.swing.JButton();
         btnEliminarTC = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblTipoCaso = new javax.swing.JTable();
+        btnLimpiarTipoCaso = new javax.swing.JButton();
+        btnCerrarTipoCaso = new javax.swing.JButton();
+        txtCantEtapas = new javax.swing.JFormattedTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuUsuario = new javax.swing.JMenu();
         itemUsuario = new javax.swing.JMenuItem();
@@ -194,9 +196,10 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
         itemRDesarrollador = new javax.swing.JMenuItem();
 
         dialogUsuario.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        dialogUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         dialogUsuario.setMinimumSize(new java.awt.Dimension(400, 300));
         dialogUsuario.setModal(true);
-        dialogUsuario.setSize(new java.awt.Dimension(625, 425));
+        dialogUsuario.setSize(new java.awt.Dimension(655, 465));
 
         jLabel1.setText("Nombre");
 
@@ -262,6 +265,20 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
             }
         });
 
+        btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout dialogUsuarioLayout = new javax.swing.GroupLayout(dialogUsuario.getContentPane());
         dialogUsuario.getContentPane().setLayout(dialogUsuarioLayout);
         dialogUsuarioLayout.setHorizontalGroup(
@@ -272,22 +289,28 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(dialogUsuarioLayout.createSequentialGroup()
                         .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pasword, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogUsuarioLayout.createSequentialGroup()
+                                .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(dialogUsuarioLayout.createSequentialGroup()
                                 .addComponent(btnAgregarU)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(36, 36, 36)))
+                        .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dialogUsuarioLayout.createSequentialGroup()
+                                .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(pasword, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28))
+                            .addGroup(dialogUsuarioLayout.createSequentialGroup()
                                 .addComponent(btnActualizarU)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEliminarU))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                                .addComponent(btnEliminarU)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(dialogUsuarioLayout.createSequentialGroup()
                                 .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
@@ -295,8 +318,14 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
                                 .addGap(30, 30, 30)
                                 .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ftxtDPI, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                                    .addComponent(cbTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogUsuarioLayout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(btnLimpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCerrar)))
+                        .addGap(5, 5, 5)))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         dialogUsuarioLayout.setVerticalGroup(
             dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,18 +351,20 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(cbTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17)
-                        .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAgregarU)
-                            .addComponent(btnEliminarU)
-                            .addComponent(btnActualizarU))))
+                            .addComponent(cbTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(23, 23, 23)
+                .addGroup(dialogUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarU)
+                    .addComponent(btnActualizarU)
+                    .addComponent(btnEliminarU)
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnCerrar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
-        dialogProyecto.setSize(new java.awt.Dimension(550, 440));
+        dialogProyecto.setSize(new java.awt.Dimension(750, 480));
 
         jLabel6.setText("Nombre Proyecto");
 
@@ -345,33 +376,67 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
 
         jLabel8.setText("Administrador de Proyecto");
 
-        cbAdminP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        AutoCompleteDecorator.decorate(cbAdminP);
+        cbAdminP.setEditable(true);
+        cbAdminP.setMaximumRowCount(25);
 
         btnAgregarP.setText("Agregar");
+        btnAgregarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarPActionPerformed(evt);
+            }
+        });
 
         btnActualizarP.setText("Actualizar");
+        btnActualizarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarPActionPerformed(evt);
+            }
+        });
 
         btnElimnarP.setText("Eliminar");
-
-        btnCambiarAdmin.setText("Cambiar Admin. Proyecto");
+        btnElimnarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimnarPActionPerformed(evt);
+            }
+        });
 
         tblProyectos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nombre", "Administrador de Proyecto"
+                "Id", "Nombre", "Estado", "DPI Admin.", "Admin. de Proyecto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tblProyectos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProyectosMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblProyectos);
+
+        jButton1.setText("Cerrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarProyecto.setText("Limpiar");
+        btnLimpiarProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarProyectoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dialogProyectoLayout = new javax.swing.GroupLayout(dialogProyecto.getContentPane());
         dialogProyecto.getContentPane().setLayout(dialogProyectoLayout);
@@ -386,23 +451,24 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(dialogProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(dialogProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(dialogProyectoLayout.createSequentialGroup()
                                 .addComponent(btnAgregarP)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnActualizarP)
-                                .addGap(18, 18, 18)
+                                .addGap(33, 33, 33)
                                 .addComponent(btnElimnarP)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCambiarAdmin))
-                            .addGroup(dialogProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(dialogProyectoLayout.createSequentialGroup()
-                                    .addComponent(txtNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(cbAdminP, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane2)))))
+                                .addGap(44, 44, 44)
+                                .addComponent(btnLimpiarProyecto)
+                                .addGap(48, 48, 48)
+                                .addComponent(jButton1))
+                            .addGroup(dialogProyectoLayout.createSequentialGroup()
+                                .addComponent(txtNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbAdminP, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2))))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         dialogProyectoLayout.setVerticalGroup(
@@ -417,16 +483,18 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(dialogProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(dialogProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(dialogProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregarP)
-                    .addComponent(btnActualizarP)
-                    .addComponent(btnElimnarP)
-                    .addComponent(btnCambiarAdmin))
+                    .addGroup(dialogProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(btnLimpiarProyecto)
+                        .addComponent(btnElimnarP)
+                        .addComponent(btnActualizarP)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jLabel9.setText("Nombre");
@@ -434,10 +502,25 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
         jLabel10.setText("Cantidad Etapas");
 
         btnAgregarTC.setText("Agregar");
+        btnAgregarTC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarTCActionPerformed(evt);
+            }
+        });
 
         btnActualizarTC.setText("Actualizar");
+        btnActualizarTC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarTCActionPerformed(evt);
+            }
+        });
 
         btnEliminarTC.setText("Eliminar");
+        btnEliminarTC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarTCActionPerformed(evt);
+            }
+        });
 
         tblTipoCaso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -455,7 +538,32 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblTipoCaso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTipoCasoMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblTipoCaso);
+
+        btnLimpiarTipoCaso.setText("Limpiar");
+        btnLimpiarTipoCaso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarTipoCasoActionPerformed(evt);
+            }
+        });
+
+        btnCerrarTipoCaso.setText("Cerrar");
+        btnCerrarTipoCaso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarTipoCasoActionPerformed(evt);
+            }
+        });
+
+        try {
+            txtCantEtapas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout dialogTipoCasoLayout = new javax.swing.GroupLayout(dialogTipoCaso.getContentPane());
         dialogTipoCaso.getContentPane().setLayout(dialogTipoCasoLayout);
@@ -464,22 +572,25 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
             .addGroup(dialogTipoCasoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dialogTipoCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4)
                     .addGroup(dialogTipoCasoLayout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNombreTC, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCantEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCantEtapas))
                     .addGroup(dialogTipoCasoLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
                         .addComponent(btnAgregarTC)
                         .addGap(18, 18, 18)
                         .addComponent(btnActualizarTC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminarTC)
+                        .addGap(27, 27, 27)
+                        .addComponent(btnLimpiarTipoCaso)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminarTC)))
+                        .addComponent(btnCerrarTipoCaso)))
                 .addContainerGap(163, Short.MAX_VALUE))
         );
         dialogTipoCasoLayout.setVerticalGroup(
@@ -489,13 +600,15 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
                 .addGroup(dialogTipoCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtNombreTC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCantEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(txtCantEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(dialogTipoCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarTC)
                     .addComponent(btnActualizarTC)
-                    .addComponent(btnEliminarTC))
+                    .addComponent(btnEliminarTC)
+                    .addComponent(btnLimpiarTipoCaso)
+                    .addComponent(btnCerrarTipoCaso))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(134, Short.MAX_VALUE))
@@ -518,6 +631,11 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
         menuProyecto.setText("Proyectos");
 
         itemProyecto.setText("Crear Proyecto");
+        itemProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemProyectoActionPerformed(evt);
+            }
+        });
         menuProyecto.add(itemProyecto);
 
         itemDesactivarP.setText("Desactivar Proyecto");
@@ -528,6 +646,11 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
         menuTipoCaso.setText("Tipos de Caso");
 
         itemTipoCaso.setText("Crear Tipo Caso");
+        itemTipoCaso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemTipoCasoActionPerformed(evt);
+            }
+        });
         menuTipoCaso.add(itemTipoCaso);
 
         jMenuBar1.add(menuTipoCaso);
@@ -581,8 +704,72 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarUActionPerformed
 
     private void tblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuarioMouseClicked
-        ControladorUI.tblMouseClicked();
+        ControladorUI.tblMouseClickedUser();
     }//GEN-LAST:event_tblUsuarioMouseClicked
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        ControladorUI.limpiarCamposUsuario();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        ControladorUI.cerrarDialog(dialogUsuario);
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void itemProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemProyectoActionPerformed
+        ControladorUI.itemAgregarProyecto();
+    }//GEN-LAST:event_itemProyectoActionPerformed
+
+    private void btnAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPActionPerformed
+        ControladorUI.btnAgregarProject();
+    }//GEN-LAST:event_btnAgregarPActionPerformed
+
+    private void btnActualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPActionPerformed
+        ControladorUI.btnActualizarProject();
+    }//GEN-LAST:event_btnActualizarPActionPerformed
+
+    private void btnElimnarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimnarPActionPerformed
+        ControladorUI.btnEliminarProject();
+    }//GEN-LAST:event_btnElimnarPActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ControladorUI.cerrarDialog(dialogProyecto);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblProyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProyectosMouseClicked
+        ControladorUI.tblMouseClickedProject();
+    }//GEN-LAST:event_tblProyectosMouseClicked
+
+    private void btnLimpiarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarProyectoActionPerformed
+        ControladorUI.limpiarCamposProyecto();
+    }//GEN-LAST:event_btnLimpiarProyectoActionPerformed
+
+    private void itemTipoCasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTipoCasoActionPerformed
+        ControladorUI.itemAgregarTipoCaso();
+    }//GEN-LAST:event_itemTipoCasoActionPerformed
+
+    private void btnAgregarTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTCActionPerformed
+        ControladorUI.btnAgregarTipoCaso();
+    }//GEN-LAST:event_btnAgregarTCActionPerformed
+
+    private void btnActualizarTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarTCActionPerformed
+        ControladorUI.btnActualizarTipoCaso();
+    }//GEN-LAST:event_btnActualizarTCActionPerformed
+
+    private void btnEliminarTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTCActionPerformed
+        ControladorUI.btnEliminarTipoCaso();
+    }//GEN-LAST:event_btnEliminarTCActionPerformed
+
+    private void btnLimpiarTipoCasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarTipoCasoActionPerformed
+        ControladorUI.limpiarCamposTipoCaso();
+    }//GEN-LAST:event_btnLimpiarTipoCasoActionPerformed
+
+    private void btnCerrarTipoCasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarTipoCasoActionPerformed
+        ControladorUI.cerrarDialog(dialogTipoCaso);
+    }//GEN-LAST:event_btnCerrarTipoCasoActionPerformed
+
+    private void tblTipoCasoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoCasoMouseClicked
+        ControladorUI.tblMouseClickedTipoCaso();
+    }//GEN-LAST:event_tblTipoCasoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarP;
@@ -591,10 +778,14 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarP;
     private javax.swing.JButton btnAgregarTC;
     private javax.swing.JButton btnAgregarU;
-    private javax.swing.JButton btnCambiarAdmin;
+    private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnCerrarTipoCaso;
     private javax.swing.JButton btnEliminarTC;
     private javax.swing.JButton btnEliminarU;
     private javax.swing.JButton btnElimnarP;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnLimpiarProyecto;
+    private javax.swing.JButton btnLimpiarTipoCaso;
     private javax.swing.JComboBox<String> cbAdminP;
     private javax.swing.JComboBox<String> cbTipoUser;
     private javax.swing.JDialog dialogProyecto;
@@ -609,6 +800,7 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemRProyecto;
     private javax.swing.JMenuItem itemTipoCaso;
     private javax.swing.JMenuItem itemUsuario;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -632,7 +824,7 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
     private javax.swing.JTable tblProyectos;
     private javax.swing.JTable tblTipoCaso;
     private javax.swing.JTable tblUsuario;
-    private javax.swing.JTextField txtCantEtapas;
+    private javax.swing.JFormattedTextField txtCantEtapas;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreProyecto;

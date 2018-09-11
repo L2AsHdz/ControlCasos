@@ -5,6 +5,7 @@
  */
 package control_casos.ui;
 
+import com.sun.glass.events.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -76,6 +77,12 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        txtLoginPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtLoginPassKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,13 +127,19 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        ControladorUI.btnIniciar();
-    }//GEN-LAST:event_btnIniciarActionPerformed
-
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void txtLoginPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginPassKeyReleased
+        if (evt.VK_ENTER == evt.getKeyCode()){
+            ControladorUI.btnIniciar();
+        }
+    }//GEN-LAST:event_txtLoginPassKeyReleased
+
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        ControladorUI.btnIniciar();
+    }//GEN-LAST:event_btnIniciarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;

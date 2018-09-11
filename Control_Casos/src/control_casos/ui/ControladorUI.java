@@ -1,13 +1,21 @@
 package control_casos.ui;
 
+import control_casos.backend.casos.TipoCaso;
+import control_casos.backend.datos.ControladorProyectos;
+import control_casos.backend.datos.ControladorTipoCasos;
 import control_casos.backend.datos.ControladorUsuarios;
+import control_casos.backend.proyectos.Proyecto;
 import control_casos.backend.usuarios.Usuario;
 import java.util.ArrayList;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ControladorUI {
     private static String dpi2 = "";
+    private static int idTP = 0;
+    private static int idTP = 0;
     private static Login log = new Login();
     private static AdministradorProyectoUI adminUI = new AdministradorProyectoUI();
     private static AdministradorSistemaUI adminSUI = new AdministradorSistemaUI();
@@ -15,12 +23,20 @@ public class ControladorUI {
     private static ControladorUsuarios controlUser = new ControladorUsuarios();
     private static Usuario usuario;
     private static ArrayList<Usuario> listUser = null;
+    private static ControladorProyectos controlProject = new ControladorProyectos();
+    private static Proyecto proyecto;
+    private static ArrayList<Proyecto> listProject = null;
+    private static ControladorTipoCasos controlCaseType = new ControladorTipoCasos();
+    private static TipoCaso tipoCaso = new TipoCaso();
+    private static ArrayList<TipoCaso> listCaseType = null;
 
     public ControladorUI() {
         log.setLocationRelativeTo(null);
         log.setResizable(false);
         log.setVisible(true);
     }
+    
+    //////////////////////////METODOS USUARIO///////////////////////////////////
     
     //Controla las acciones del boton iniciar en el login
     public static void btnIniciar(){
@@ -38,22 +54,17 @@ public class ControladorUI {
                     break;
                     
                 case 1:
-                    log.setVisible(false);
-                    adminSUI.setLocationRelativeTo(null);
-                    adminSUI.setResizable(false);
-                    adminSUI.setVisible(true);
+                    log.dispose();
+                    //log.setVisible(false);
+                    abrirJFrame(adminSUI);
                     break;
                 
                 case 2:
-                    adminUI.setLocationRelativeTo(null);
-                    adminUI.setResizable(false);
-                    adminUI.setVisible(true);
+                    abrirJFrame(adminUI);
                     break;
                     
                 case 3:
-                    developerUI.setLocationRelativeTo(null);
-                    developerUI.setResizable(false);
-                    developerUI.setVisible(true);
+                    abrirJFrame(developerUI);
                     break;
             }
         }else {
@@ -64,10 +75,8 @@ public class ControladorUI {
     
     public static void itemAgregarUser(){
         limpiarCamposUsuario();
-        adminSUI.getDialogUsuario().setLocationRelativeTo(null);
-        adminSUI.getDialogUsuario().setResizable(false);
         refrescarTablaUsuario();
-        adminSUI.getDialogUsuario().setVisible(true);
+        abrirJDialog(adminSUI.getDialogUsuario());
     }
     
     public static void btnAgregarUser(){
@@ -81,6 +90,9 @@ public class ControladorUI {
         if (acceso.equals("")) {
             usuario = new Usuario(dpi, nombre, nombreUser, pass, tipo);
             if (controlUser.create(usuario)) {
+                if (usuario.getTipo() == 2) {
+                    adminSUI.getCbAdminP().addItem(usuario.getDpi());
+                }
                 limpiarCamposUsuario();
                 JOptionPane.showMessageDialog(null, "Usuario creado", "Exito!", JOptionPane.INFORMATION_MESSAGE);
             }else {
@@ -113,7 +125,7 @@ public class ControladorUI {
         }
     }
     
-    public static void tblMouseClicked(){
+    public static void tblMouseClickedUser(){
         int fila = adminSUI.getTblUsuario().getSelectedRow();
         dpi2 = adminSUI.getTblUsuario().getValueAt(fila, 0).toString();
         usuario = controlUser.leerUsuarioFila(dpi2);
@@ -135,10 +147,9 @@ public class ControladorUI {
             }
             limpiarCamposUsuario();
         }
-        
     }
     
-    private static void limpiarCamposUsuario(){
+    public static void limpiarCamposUsuario(){
         adminSUI.getTxtNombre().setText("");
         adminSUI.getFtxtDPI().setText("");
         adminSUI.getTxtNombreUsuario().setText("");
@@ -156,7 +167,7 @@ public class ControladorUI {
             if (u.getNombreUsuarioS().isEmpty()) {
                 u.setNombreUsuarioS("No Creado");
             }
-            Object item[] = new Object[5];
+            Object item[] = new Object[4];
             item[0] = u.getDpi();
             item[1] = u.getNombre();
             item[2] = u.getTipoN();
@@ -164,5 +175,238 @@ public class ControladorUI {
             model.addRow(item);
         }
         adminSUI.getTblUsuario().setModel(model);
+    }
+    //-----------------------FIN METODOS USUARIO-------------------------------/
+    
+    
+    /////////////////////////METODOS PROYECTO///////////////////////////////////
+    
+    public static void itemAgregarProyecto(){
+        cargarItemsDpiAdminP();
+        refrescarTablaProyecto();
+        limpiarCamposProyecto();
+        abrirJDialog(adminSUI.getDialogProyecto());
+    }
+    
+    public static void btnAgregarProject(){
+        DefaultTableModel model = (DefaultTableModel) adminSUI.getTblProyectos().getModel();
+        int id = model.getRowCount()+1;
+        int estado = 1;
+        String nombre = adminSUI.getTxtNombreProyecto().getText();
+        String descripcion = adminSUI.getTxtDescripcion().getText();
+        int indexAdminP = adminSUI.getCbAdminP().getSelectedIndex();
+        String dpiAdminP ="";
+        if (indexAdminP != -1) {
+            dpiAdminP = adminSUI.getCbAdminP().getSelectedItem().toString();
+        }
+        String acceso = Validaciones.validarAgregarProyecto(nombre, indexAdminP);
+        
+        if (acceso.equals("")) {
+            proyecto = new Proyecto(id, nombre, descripcion, estado, dpiAdminP);
+            if (controlProject.create(proyecto)) {
+                limpiarCamposProyecto();
+                JOptionPane.showMessageDialog(null, "Proyecto creado", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null, "Proyecto ya existe", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, acceso, "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        refrescarTablaProyecto();
+    }
+    
+    public static void btnActualizarProject(){
+        int id = idTP;
+        int estado = 1;
+        String nombre = adminSUI.getTxtNombreProyecto().getText();
+        String descripcion = adminSUI.getTxtDescripcion().getText();
+        int indexAdminP = adminSUI.getCbAdminP().getSelectedIndex();
+        String dpiAdminP ="";
+        if (indexAdminP != -1) {
+            dpiAdminP = adminSUI.getCbAdminP().getSelectedItem().toString();
+        }
+        String acceso = Validaciones.validarAgregarProyecto(nombre, indexAdminP);
+        if (acceso.equals("")) {
+            proyecto = new Proyecto(id, nombre, descripcion, estado, dpiAdminP);
+            if (controlProject.actualizar(proyecto)) {
+                refrescarTablaProyecto();
+                JOptionPane.showMessageDialog(null, "Se actualizo el proyecto", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null, "No se actualizo registro", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+            limpiarCamposProyecto();
+        }else {
+            JOptionPane.showMessageDialog(null, acceso, "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    public static void tblMouseClickedProject(){
+        int fila = adminSUI.getTblProyectos().getSelectedRow();
+        idTP = Integer.parseInt(adminSUI.getTblProyectos().getValueAt(fila, 0).toString());
+        proyecto = controlProject.leerProyectoFila(idTP);
+        adminSUI.getTxtNombreProyecto().setText(proyecto.getNombre());
+        adminSUI.getTxtDescripcion().setText(proyecto.getDescripcion());
+        adminSUI.getCbAdminP().setSelectedItem(proyecto.getDpiAdminP());
+    }
+    
+    public static void btnEliminarProject(){
+        int x = JOptionPane.showConfirmDialog(null, "ESTAS SEGURO DE ELIMINAR ESTE RESGITRO?");
+        if (x == 0 && idTP > 0) {
+            if (controlProject.delete(idTP)) {
+                refrescarTablaProyecto();
+                JOptionPane.showMessageDialog(null, "Se elimino el registro", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null, "No se elimino registro");
+            }
+            limpiarCamposProyecto();
+        }
+    }
+    
+    public static void limpiarCamposProyecto(){
+        adminSUI.getTxtNombreProyecto().setText("");
+        adminSUI.getTxtDescripcion().setText("");
+        adminSUI.getCbAdminP().setSelectedIndex(-1);
+    }
+    
+    private static void cargarItemsDpiAdminP(){
+        adminSUI.getCbAdminP().removeAllItems();
+        listUser = controlUser.leerUsuario();
+        for (Usuario u: listUser) {
+            if (u.getTipo() == 2) {
+                adminSUI.getCbAdminP().addItem(u.getDpi());
+            }
+        }
+    }
+    
+    private static void refrescarTablaProyecto(){
+        DefaultTableModel model = (DefaultTableModel) adminSUI.getTblProyectos().getModel();
+        model.setRowCount(0);
+        
+        listProject = controlProject.leerProyecto();
+        for (Proyecto p: listProject) {
+            p.setEstadoN();
+            Object item[] = new Object[5];
+            item[0] = p.getId();
+            item[1] = p.getNombre();
+            item[2] = p.getEstadoN();
+            item[3] = p.getDpiAdminP();
+            item[4] = p.getNombreAdminP();
+            model.addRow(item);
+        }
+        adminSUI.getTblProyectos().setModel(model);
+    }
+    //-----------------------FIN METODOS PROYECTO------------------------------/
+    
+    
+    /////////////////////////METODOS TIPO CASO//////////////////////////////////
+    
+    public static void itemAgregarTipoCaso(){
+        refrescarTablaTipoCaso();
+        limpiarCamposTipoCaso();
+        abrirJDialog(adminSUI.getDialogProyecto());
+    }
+    
+    public static void btnAgregarTipoCaso(){
+        DefaultTableModel model = (DefaultTableModel) adminSUI.getTblTipoCaso().getModel();
+        int id = model.getRowCount()+1;
+        String nombre = adminSUI.getTxtNombreTC().getText();
+        String textoInt = adminSUI.getTxtCantEtapas().getText();
+        int cantidadEtapas = Integer.parseInt(textoInt);
+        String acceso = Validaciones.validarAgregarTipoCaso(nombre, textoInt);
+        
+        if (acceso.equals("")) {
+            tipoCaso = new TipoCaso(id, nombre, cantidadEtapas);
+            if (controlCaseType.create(tipoCaso)) {
+                limpiarCamposTipoCaso();
+                JOptionPane.showMessageDialog(null, "Tipo de caso creado", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null, "Ocurrio un error al ingresar el registro, intente de nuevo", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, acceso, "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        refrescarTablaTipoCaso();
+    }
+    
+    public static void btnActualizarTipoCaso(){
+        int id = idTP;
+        String nombre = adminSUI.getTxtNombreTC().getText();
+        String textoInt = adminSUI.getTxtCantEtapas().getText();
+        int cantidadEtapas = Integer.parseInt(textoInt);
+        String acceso = Validaciones.validarAgregarTipoCaso(nombre, textoInt);
+        if (acceso.equals("")) {
+            tipoCaso = new TipoCaso(id, nombre, cantidadEtapas);
+            if (controlCaseType.actualizar(tipoCaso)) {
+                refrescarTablaTipoCaso();
+                JOptionPane.showMessageDialog(null, "Se actualizo el tipo de caso", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null, "No se actualizo registro", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+            limpiarCamposTipoCaso();
+        }else {
+            JOptionPane.showMessageDialog(null, acceso, "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    public static void tblMouseClickedTipoCaso(){
+        int fila = adminSUI.getTblTipoCaso().getSelectedRow();
+        idTP = Integer.parseInt(adminSUI.getTblTipoCaso().getValueAt(fila, 0).toString());
+        tipoCaso = controlCaseType.leerTipoCasoFila(idTP);
+        adminSUI.getTxtNombreTC().setText(tipoCaso.getNombre());
+        adminSUI.getTxtCantEtapas().setText(String.valueOf(tipoCaso.getCantidadEtapas()));
+    }
+    
+    public static void btnEliminarTipoCaso(){
+        int x = -1;
+        if (idTP > 0) {
+            x = JOptionPane.showConfirmDialog(null, "ESTAS SEGURO DE ELIMINAR ESTE RESGITRO?");
+        }
+        if (x == 0 && idTP > 0) {
+            if (controlCaseType.delete(idTP)) {
+                refrescarTablaTipoCaso();
+                JOptionPane.showMessageDialog(null, "Se elimino el registro", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null, "No se elimino registro");
+            }
+            limpiarCamposTipoCaso();
+        }
+    }
+    
+    public static void limpiarCamposTipoCaso(){
+        adminSUI.getTxtNombreTC().setText("");
+        adminSUI.getTxtCantEtapas().setText("");
+    }
+    
+    private static void refrescarTablaTipoCaso(){
+        DefaultTableModel model = (DefaultTableModel) adminSUI.getTblTipoCaso().getModel();
+        model.setRowCount(0);
+        
+        listCaseType = controlCaseType.leerTipoCaso();
+        for (TipoCaso ct: listCaseType) {
+            Object item[] = new Object[3];
+            item[0] = ct.getId();
+            item[1] = ct.getNombre();
+            item[2] = ct.getCantidadEtapas();
+            model.addRow(item);
+        }
+        adminSUI.getTblTipoCaso().setModel(model);
+    }
+    
+    //---------------------FIN METODOS TIPO CASO-------------------------------/
+    
+    private static void abrirJFrame(JFrame jf){
+        jf.setLocationRelativeTo(null);
+        jf.setResizable(false);
+        jf.setVisible(true);
+    }
+    
+    private static void abrirJDialog(JDialog jd){
+        jd.setLocationRelativeTo(null);
+        jd.setResizable(false);
+        jd.setVisible(true);
+    }
+    
+    public static void cerrarDialog(JDialog jd){
+        jd.dispose();
     }
 }

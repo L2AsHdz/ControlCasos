@@ -113,7 +113,7 @@ public class ControladorUsuarios {
             ps = null;
             CBD.desconectar();
         } catch (SQLException ex) {
-            System.out.println("Fallo metodo read prodcuto");
+            System.out.println("Fallo metodo leerusuario");
         }
         return u;
     }
