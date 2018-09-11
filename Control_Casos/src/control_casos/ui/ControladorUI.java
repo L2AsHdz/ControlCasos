@@ -3,9 +3,11 @@ package control_casos.ui;
 import control_casos.backend.casos.Caso;
 import control_casos.backend.casos.TipoCaso;
 import control_casos.backend.datos.ControladorCasos;
+import control_casos.backend.datos.ControladorEtapas;
 import control_casos.backend.datos.ControladorProyectos;
 import control_casos.backend.datos.ControladorTipoCasos;
 import control_casos.backend.datos.ControladorUsuarios;
+import control_casos.backend.etapas.Etapa;
 import control_casos.backend.proyectos.Proyecto;
 import control_casos.backend.usuarios.Usuario;
 import java.util.ArrayList;
@@ -36,6 +38,9 @@ public class ControladorUI {
     private static ControladorCasos controlCase = new ControladorCasos();
     private static Caso caso;
     private static ArrayList<Caso> listCase= null;
+    private static ControladorEtapas controlStage = new ControladorEtapas();
+    private static Etapa etapa = new Etapa();
+    private static ArrayList<Etapa> listStage = null;
 
     public ControladorUI() {
         log.setLocationRelativeTo(null);
@@ -97,9 +102,9 @@ public class ControladorUI {
         if (acceso.equals("")) {
             usuario = new Usuario(dpi, nombre, nombreUser, pass, tipo);
             if (controlUser.create(usuario)) {
-                if (usuario.getTipo() == 2) {
-                    adminSUI.getCbAdminP().addItem(usuario.getDpi());
-                }
+//                if (usuario.getTipo() == 2) {
+//                    adminSUI.getCbAdminP().addItem(usuario.getDpi());
+//                }
                 limpiarCamposUsuario();
                 JOptionPane.showMessageDialog(null, "Usuario creado", "Exito!", JOptionPane.INFORMATION_MESSAGE);
             }else {
@@ -211,7 +216,7 @@ public class ControladorUI {
         if (acceso.equals("")) {
             proyecto = new Proyecto(id, nombre, descripcion, estado, dpiAdminP);
             if (controlProject.create(proyecto)) {
-                adminUI.getCbIDProyecto().addItem(String.valueOf(proyecto.getId()));
+                //adminUI.getCbIDProyecto().addItem(String.valueOf(proyecto.getId()));
                 limpiarCamposProyecto();
                 JOptionPane.showMessageDialog(null, "Proyecto creado", "Exito!", JOptionPane.INFORMATION_MESSAGE);
             }else {
@@ -431,6 +436,11 @@ public class ControladorUI {
         if (acceso.equals("")) {
             caso = new Caso(id, nombre, descripcion, fechaInicio, fechaLimite, estado, idProyecto, idTipoCaso);
             if (controlCase.create(caso)) {
+                /*cargarItemsEtapa();
+                limpiarCamposEtapa();
+                abrirJDialog(adminUI.getDialogEtapa());
+                etapa.setIdCaso(idTipoCaso);
+                etapa.setIdProyecto(idProyecto);*/
                 limpiarCamposCaso();
                 JOptionPane.showMessageDialog(null, "Tipo de caso creado", "Exito!", JOptionPane.INFORMATION_MESSAGE);
             }else {
@@ -539,6 +549,71 @@ public class ControladorUI {
     }
     //-------------------------FIN METODOS CASOS-------------------------------/
     
+    /*public static void btnAsignarDesarrollador(){
+        DefaultTableModel model = (DefaultTableModel) adminUI.getTblEtapas().getModel();
+        int id = model.getRowCount()+1;
+        int estado = 1;
+        String nombre = adminUI.getTxtNombreEtapa().getText();
+        String textoCostoHora = adminUI.getTxtCostoHora().getText();
+        int indexDPI = adminUI.getCbIDDevEtapa().getSelectedIndex();
+        String dpi = adminUI.getCbIDDevEtapa().getSelectedItem().toString();
+        String acceso = Validaciones.validarAsignarDesarrollador(nombre, textoCostoHora, indexDPI);
+        
+        if (acceso.equals("")) {
+            int costoHora = Integer.parseInt(textoCostoHora);
+            etapa.setId(id);
+            etapa.setEstado(estado);
+            etapa.setNombre(nombre);
+            etapa.setCostoHora(costoHora);
+            etapa.setDpiDesarrollador(dpi);
+            System.out.println(etapa.getId() + etapa.getNombre() + etapa.getIdProyecto() +
+                    etapa.getIdCaso() + etapa.getEstadoN() + etapa.getDpiDesarrollador());
+            if (controlStage.create(etapa)) {
+                limpiarCamposEtapa();
+                JOptionPane.showMessageDialog(null, "Etapa asignada a desarrollador", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null, "Ocurrio un error al ingresar el registro, intente de nuevo", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, acceso, "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        refrescarTablaEtapa();
+    }
+    
+    private static void cargarItemsEtapa(){
+        adminUI.getCbIDDevEtapa().removeAllItems();
+        listUser = controlUser.leerUsuario();
+        for (Usuario u: listUser) {
+            if (u.getTipo() == 3) {
+                adminUI.getCbIDDevEtapa().addItem(u.getDpi());
+            }
+        }
+    }
+    
+    public static void limpiarCamposEtapa(){
+        adminUI.getTxtNombreEtapa().setText("");
+        adminUI.getCbIDDevEtapa().setSelectedIndex(-1);
+        adminUI.getTxtCostoHora().setText("");
+    }
+    
+    private static void refrescarTablaEtapa(){
+        DefaultTableModel model = (DefaultTableModel) adminUI.getTblEtapas().getModel();
+        model.setRowCount(0);
+        
+        listStage = controlStage.leerEtapa();
+        for (Etapa e: listStage) {
+            e.setEstadoN();
+            Object item[] = new Object[6];
+            item[0] = e.getId();
+            item[1] = e.getNombre();
+            item[2] = e.getIdProyecto();
+            item[3] = e.getIdCaso();
+            item[4] = e.getEstadoN();
+            item[5] = e.getNombreDesarrollador();
+            model.addRow(item);
+        }
+        adminUI.getTblEtapas().setModel(model);
+    }*/
     
     private static void abrirJFrame(JFrame jf){
         jf.setLocationRelativeTo(null);

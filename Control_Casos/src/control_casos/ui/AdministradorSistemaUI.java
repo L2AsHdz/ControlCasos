@@ -365,6 +365,7 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
                 .addContainerGap(85, Short.MAX_VALUE))
         );
 
+        dialogProyecto.setModal(true);
         dialogProyecto.setSize(new java.awt.Dimension(750, 480));
 
         jLabel6.setText("Nombre Proyecto");
@@ -498,6 +499,7 @@ public class AdministradorSistemaUI extends javax.swing.JFrame {
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
+        dialogTipoCaso.setModal(true);
         dialogTipoCaso.setSize(new java.awt.Dimension(490, 360));
 
         jLabel9.setText("Nombre");

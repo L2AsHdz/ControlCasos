@@ -251,6 +251,7 @@
     </Container>
     <Container class="javax.swing.JDialog" name="dialogProyecto">
       <Properties>
+        <Property name="modal" type="boolean" value="true"/>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[750, 480]"/>
         </Property>
@@ -440,6 +441,7 @@
     </Container>
     <Container class="javax.swing.JDialog" name="dialogTipoCaso">
       <Properties>
+        <Property name="modal" type="boolean" value="true"/>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[490, 360]"/>
         </Property>

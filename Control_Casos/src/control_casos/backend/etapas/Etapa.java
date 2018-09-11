@@ -5,13 +5,17 @@ public class Etapa {
     private String nombre;
     private String descripcion;
     private int estado;
+    private String estadoN;
     private String comentarioFinal;
     private String comentarioRechazo;
     private double costoHora;
     private double horasTrabajadas;
     private int idProyecto;
+    private String nombreProyecto;
     private int idCaso;
+    private String nombreCaso;
     private String dpiDesarrollador;
+    private String nombreDesarrollador;
 
     public Etapa() {
     }
@@ -57,6 +61,36 @@ public class Etapa {
         this.estado = estado;
     }
 
+    public String getEstadoN() {
+        return estadoN;
+    }
+
+    public void setEstadoN() {
+        switch (estado) {
+            case 1:
+                this.estadoN = "En Progreso";
+                break;
+            case 2:
+                this.estadoN = "Trabajo Finzalizado";
+                break;
+            case 3:
+                this.estadoN = "Rechazada";
+                break;
+            case 4:
+                this.estadoN = "Correccion";
+                break;
+            case 5:
+                this.estadoN = "Congelada";
+                break;
+            case 6:
+                this.estadoN = "Cancelada";
+                break;
+            case 7:
+                this.estadoN = "Finalizada";
+                break;
+        }
+    }
+
     public String getComentarioFinal() {
         return comentarioFinal;
     }
@@ -97,6 +131,14 @@ public class Etapa {
         this.idProyecto = idProyecto;
     }
 
+    public String getNombreProyecto() {
+        return nombreProyecto;
+    }
+
+    public void setNombreProyecto(String idnombreProyecto) {
+        this.nombreProyecto = idnombreProyecto;
+    }
+
     public int getIdCaso() {
         return idCaso;
     }
@@ -105,12 +147,28 @@ public class Etapa {
         this.idCaso = idCaso;
     }
 
+    public String getNombreCaso() {
+        return nombreCaso;
+    }
+
+    public void setNombreCaso(String nombreCaso) {
+        this.nombreCaso = nombreCaso;
+    }
+
     public String getDpiDesarrollador() {
         return dpiDesarrollador;
     }
 
     public void setDpiDesarrollador(String dpiDesarrollador) {
         this.dpiDesarrollador = dpiDesarrollador;
+    }
+
+    public String getNombreDesarrollador() {
+        return nombreDesarrollador;
+    }
+
+    public void setNombreDesarrollador(String nombreDesarrollador) {
+        this.nombreDesarrollador = nombreDesarrollador;
     }
     
 }

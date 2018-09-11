@@ -56,4 +56,23 @@ public class Validaciones {
         }
         return error;
     }
+    
+    public static String validarAsignarDesarrollador(String nombre, String costoHora, int indexDPI){
+        String error = "";
+        if (nombre.isEmpty() || costoHora.isEmpty() || indexDPI == -1) {
+            error = "no pueden haber campos vacios";
+        }
+        boolean isNumeric;
+        try {
+            Integer.parseInt(costoHora);
+            isNumeric = true;
+        } catch (NumberFormatException e) {
+            isNumeric = false;
+        }
+        if (!isNumeric) {
+            error = "El dato no es numerico";
+
+        }
+        return error;
+    }
 }

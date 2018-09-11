@@ -9,7 +9,6 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -61,14 +60,6 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
         return txtFechaLimite;
     }
 
-//    public JFormattedTextField getTxtFechaInicio() {
-//        return txtFechaInicio;
-//    }
-//
-//    public JFormattedTextField getTxtFechaLimite() {
-//        return txtFechaLimite;
-//    }
-
     public JComboBox<String> getCbIDProyecto() {
         return cbIDProyecto;
     }
@@ -79,6 +70,38 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
 
     public JTextField getTxtNombreC() {
         return txtNombreC;
+    }
+
+    public JButton getBtnAsigDesarrollador() {
+        return btnAsigDesarrollador;
+    }
+
+    public JButton getBtnLimpiarEtapa() {
+        return btnLimpiarEtapa;
+    }
+
+    public JComboBox<String> getCbIDDevEtapa() {
+        return cbIDDevEtapa;
+    }
+
+    public JDialog getDialogEtapa() {
+        return dialogEtapa;
+    }
+
+    public JTextField getTxtCostoHora() {
+        return txtCostoHora;
+    }
+
+    public JTextField getTxtNombreEtapa() {
+        return txtNombreEtapa;
+    }
+
+    public JDialog getDialogVerificarTrabajo() {
+        return dialogVerificarTrabajo;
+    }
+
+    public JTable getTblEtapas() {
+        return tblEtapas;
     }
 
     
@@ -117,6 +140,19 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
         cbIDTipoCaso = new javax.swing.JComboBox<>();
         txtFechaLimite = new com.toedter.calendar.JDateChooser();
         txtFechaInicio = new com.toedter.calendar.JDateChooser();
+        dialogEtapa = new javax.swing.JDialog();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        cbIDDevEtapa = new javax.swing.JComboBox<>();
+        txtNombreEtapa = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtCostoHora = new javax.swing.JTextField();
+        btnAsigDesarrollador = new javax.swing.JButton();
+        btnLimpiarEtapa = new javax.swing.JButton();
+        dialogVerificarTrabajo = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblEtapas = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuProyectosAP = new javax.swing.JMenu();
         itemProyectoAsig = new javax.swing.JMenuItem();
@@ -126,6 +162,7 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
         menuEtapaAP = new javax.swing.JMenu();
         itemVerificarWork = new javax.swing.JMenuItem();
 
+        dialogCaso.setModal(true);
         dialogCaso.setSize(new java.awt.Dimension(700, 500));
 
         jLabel6.setText("Id Tipo Caso");
@@ -302,6 +339,122 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
                 .addContainerGap(148, Short.MAX_VALUE))
         );
 
+        dialogEtapa.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        dialogEtapa.setModal(true);
+        dialogEtapa.setSize(new java.awt.Dimension(550, 120));
+
+        jLabel7.setText("Nombre");
+
+        jLabel10.setText("Id Desarrollador");
+
+        AutoCompleteDecorator.decorate(cbIDTipoCaso);
+        cbIDDevEtapa.setEditable(true);
+        cbIDDevEtapa.setMaximumRowCount(25);
+
+        jLabel11.setText("Costo por hora");
+
+        btnAsigDesarrollador.setText("Asignar Desarrollador");
+        btnAsigDesarrollador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsigDesarrolladorActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarEtapa.setText("Limpiar");
+        btnLimpiarEtapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarEtapaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dialogEtapaLayout = new javax.swing.GroupLayout(dialogEtapa.getContentPane());
+        dialogEtapa.getContentPane().setLayout(dialogEtapaLayout);
+        dialogEtapaLayout.setHorizontalGroup(
+            dialogEtapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogEtapaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogEtapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dialogEtapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNombreEtapa, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(txtCostoHora))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dialogEtapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(dialogEtapaLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbIDDevEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dialogEtapaLayout.createSequentialGroup()
+                        .addComponent(btnAsigDesarrollador)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpiarEtapa)))
+                .addContainerGap(150, Short.MAX_VALUE))
+        );
+        dialogEtapaLayout.setVerticalGroup(
+            dialogEtapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogEtapaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogEtapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtNombreEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(cbIDDevEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dialogEtapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtCostoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAsigDesarrollador)
+                    .addComponent(btnLimpiarEtapa))
+                .addContainerGap(211, Short.MAX_VALUE))
+        );
+
+        tblEtapas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nombre", "Id Proyecto", "Id Caso", "Estado", "Desarrollador Asignado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblEtapas);
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel8.setText("Etapas Actuales");
+
+        javax.swing.GroupLayout dialogVerificarTrabajoLayout = new javax.swing.GroupLayout(dialogVerificarTrabajo.getContentPane());
+        dialogVerificarTrabajo.getContentPane().setLayout(dialogVerificarTrabajoLayout);
+        dialogVerificarTrabajoLayout.setHorizontalGroup(
+            dialogVerificarTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogVerificarTrabajoLayout.createSequentialGroup()
+                .addGroup(dialogVerificarTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dialogVerificarTrabajoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dialogVerificarTrabajoLayout.createSequentialGroup()
+                        .addGap(239, 239, 239)
+                        .addComponent(jLabel8)))
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+        dialogVerificarTrabajoLayout.setVerticalGroup(
+            dialogVerificarTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogVerificarTrabajoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(89, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         menuProyectosAP.setText("Proyectos");
@@ -377,35 +530,56 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
         ControladorUI.tblMouseClickedCase();
     }//GEN-LAST:event_tblCasoMouseClicked
 
+    private void btnAsigDesarrolladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsigDesarrolladorActionPerformed
+        //ControladorUI.btnAsignarDesarrollador();
+    }//GEN-LAST:event_btnAsigDesarrolladorActionPerformed
+
+    private void btnLimpiarEtapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarEtapaActionPerformed
+        //ControladorUI.limpiarCamposEtapa();
+    }//GEN-LAST:event_btnLimpiarEtapaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarC;
+    private javax.swing.JButton btnAsigDesarrollador;
     private javax.swing.JButton btnCerrarCaso;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiarCaso;
+    private javax.swing.JButton btnLimpiarEtapa;
     private javax.swing.JButton btnRegistrarC;
+    private javax.swing.JComboBox<String> cbIDDevEtapa;
     private javax.swing.JComboBox<String> cbIDProyecto;
     private javax.swing.JComboBox<String> cbIDTipoCaso;
     private javax.swing.JDialog dialogCaso;
+    private javax.swing.JDialog dialogEtapa;
+    private javax.swing.JDialog dialogVerificarTrabajo;
     private javax.swing.JMenuItem itemCancelarCaso;
     private javax.swing.JMenuItem itemCrearCaso;
     private javax.swing.JMenuItem itemProyectoAsig;
     private javax.swing.JMenuItem itemVerificarWork;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JMenu menuCasoAP;
     private javax.swing.JMenu menuEtapaAP;
     private javax.swing.JMenu menuProyectosAP;
     private javax.swing.JTable tblCaso;
+    private javax.swing.JTable tblEtapas;
+    private javax.swing.JTextField txtCostoHora;
     private javax.swing.JTextArea txtDescripcion;
     private com.toedter.calendar.JDateChooser txtFechaInicio;
     private com.toedter.calendar.JDateChooser txtFechaLimite;
     private javax.swing.JTextField txtNombreC;
+    private javax.swing.JTextField txtNombreEtapa;
     // End of variables declaration//GEN-END:variables
 }
