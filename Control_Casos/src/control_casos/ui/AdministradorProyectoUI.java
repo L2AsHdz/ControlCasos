@@ -5,15 +5,84 @@
  */
 package control_casos.ui;
 
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 /**
  *
  * @author Asael
  */
 public class AdministradorProyectoUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AdministradorProyectoUI
-     */
+    public JButton getBtnActualizarC() {
+        return btnActualizarC;
+    }
+
+    public JButton getBtnEliminar() {
+        return btnEliminar;
+    }
+
+    public JButton getBtnRegistrarC() {
+        return btnRegistrarC;
+    }
+
+    public JDialog getDialogCaso() {
+        return dialogCaso;
+    }
+
+    public JButton getBtnLimpiarCaso() {
+        return btnLimpiarCaso;
+    }
+
+    public JButton getBtnCerrarCaso() {
+        return btnCerrarCaso;
+    }
+
+    public JTable getTblCaso() {
+        return tblCaso;
+    }
+
+    public JTextArea getTxtDescripcion() {
+        return txtDescripcion;
+    }
+
+    public JDateChooser getTxtFechaInicio() {
+        return txtFechaInicio;
+    }
+
+    public JDateChooser getTxtFechaLimite() {
+        return txtFechaLimite;
+    }
+
+//    public JFormattedTextField getTxtFechaInicio() {
+//        return txtFechaInicio;
+//    }
+//
+//    public JFormattedTextField getTxtFechaLimite() {
+//        return txtFechaLimite;
+//    }
+
+    public JComboBox<String> getCbIDProyecto() {
+        return cbIDProyecto;
+    }
+
+    public JComboBox<String> getCbIDTipoCaso() {
+        return cbIDTipoCaso;
+    }
+
+    public JTextField getTxtNombreC() {
+        return txtNombreC;
+    }
+
+    
+    
     public AdministradorProyectoUI() {
         initComponents();
     }
@@ -28,9 +97,7 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
     private void initComponents() {
 
         dialogCaso = new javax.swing.JDialog();
-        txtIdProyecto = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtIdCaso = new javax.swing.JFormattedTextField();
         btnRegistrarC = new javax.swing.JButton();
         btnActualizarC = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -39,13 +106,17 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtNombreC = new javax.swing.JTextField();
-        txtFechaInicio = new javax.swing.JFormattedTextField();
-        txtFechaLimite = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescripcion = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCaso = new javax.swing.JTable();
+        btnLimpiarCaso = new javax.swing.JButton();
+        btnCerrarCaso = new javax.swing.JButton();
+        cbIDProyecto = new javax.swing.JComboBox<>();
+        cbIDTipoCaso = new javax.swing.JComboBox<>();
+        txtFechaLimite = new com.toedter.calendar.JDateChooser();
+        txtFechaInicio = new com.toedter.calendar.JDateChooser();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuProyectosAP = new javax.swing.JMenu();
         itemProyectoAsig = new javax.swing.JMenuItem();
@@ -55,15 +126,30 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
         menuEtapaAP = new javax.swing.JMenu();
         itemVerificarWork = new javax.swing.JMenuItem();
 
-        dialogCaso.setSize(new java.awt.Dimension(530, 440));
+        dialogCaso.setSize(new java.awt.Dimension(700, 500));
 
-        jLabel6.setText("Id Caso");
+        jLabel6.setText("Id Tipo Caso");
 
         btnRegistrarC.setText("Registrar");
+        btnRegistrarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarCActionPerformed(evt);
+            }
+        });
 
         btnActualizarC.setText("Actualzar");
+        btnActualizarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarCActionPerformed(evt);
+            }
+        });
 
-        btnEliminar.setText("jButton3");
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
@@ -75,27 +161,54 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
 
         jLabel5.setText("Id Proyecto");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        jScrollPane2.setViewportView(txtDescripcion);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCaso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nombre", "Proyecto", "Tipo Caso", "Feha Inicio", "Fecha Limite"
+                "Id", "Nombre", "Proyecto", "Tipo Caso", "Estado", "Fecha Limite"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, false, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable1);
+        tblCaso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCasoMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblCaso);
+
+        btnLimpiarCaso.setText("Limpiar");
+        btnLimpiarCaso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarCasoActionPerformed(evt);
+            }
+        });
+
+        btnCerrarCaso.setText("Cerrar");
+        btnCerrarCaso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarCasoActionPerformed(evt);
+            }
+        });
+
+        AutoCompleteDecorator.decorate(cbIDProyecto);
+        cbIDProyecto.setEditable(true);
+        cbIDProyecto.setMaximumRowCount(25);
+
+        AutoCompleteDecorator.decorate(cbIDTipoCaso);
+        cbIDTipoCaso.setEditable(true);
+        cbIDTipoCaso.setMaximumRowCount(25);
 
         javax.swing.GroupLayout dialogCasoLayout = new javax.swing.GroupLayout(dialogCaso.getContentPane());
         dialogCaso.getContentPane().setLayout(dialogCasoLayout);
@@ -103,70 +216,90 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
             dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogCasoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dialogCasoLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dialogCasoLayout.createSequentialGroup()
+                .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dialogCasoLayout.createSequentialGroup()
                         .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(dialogCasoLayout.createSequentialGroup()
-                                .addComponent(txtIdCaso, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                                .addComponent(btnRegistrarC)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnActualizarC)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminar))
-                            .addGroup(dialogCasoLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(41, 41, 41)
                                 .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFechaLimite, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbIDProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(dialogCasoLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(dialogCasoLayout.createSequentialGroup()
                                 .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFechaInicio)
-                                    .addComponent(txtIdProyecto, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))))
-                    .addComponent(jScrollPane3))
-                .addContainerGap(202, Short.MAX_VALUE))
+                                .addGap(21, 21, 21)
+                                .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(dialogCasoLayout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cbIDTipoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(dialogCasoLayout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtFechaLimite, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnActualizarC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLimpiarCaso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogCasoLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnRegistrarC, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnCerrarCaso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(154, 154, 154))
         );
         dialogCasoLayout.setVerticalGroup(
             dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogCasoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtFechaLimite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtIdProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtIdCaso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrarC)
-                    .addComponent(btnActualizarC)
-                    .addComponent(btnEliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dialogCasoLayout.createSequentialGroup()
+                        .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(dialogCasoLayout.createSequentialGroup()
+                                .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(cbIDProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbIDTipoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(25, 25, 25)
+                                .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel3))
+                                    .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(6, 6, 6))
+                            .addComponent(txtFechaLimite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogCasoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(dialogCasoLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(btnRegistrarC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnActualizarC)
+                        .addGap(25, 25, 25)
+                        .addComponent(btnEliminar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpiarCaso)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCerrarCaso)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -181,6 +314,11 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
         menuCasoAP.setText("Casos");
 
         itemCrearCaso.setText("Crear Caso");
+        itemCrearCaso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCrearCasoActionPerformed(evt);
+            }
+        });
         menuCasoAP.add(itemCrearCaso);
 
         itemCancelarCaso.setText("Cancelar Caso");
@@ -201,20 +339,52 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 477, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void itemCrearCasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrearCasoActionPerformed
+        ControladorUI.itemAgregarCaso();
+    }//GEN-LAST:event_itemCrearCasoActionPerformed
+
+    private void btnRegistrarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarCActionPerformed
+        ControladorUI.btnAgregarCaso();
+    }//GEN-LAST:event_btnRegistrarCActionPerformed
+
+    private void btnActualizarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCActionPerformed
+        ControladorUI.btnActualizarCaso();
+    }//GEN-LAST:event_btnActualizarCActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        ControladorUI.btnEliminarCase();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnLimpiarCasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCasoActionPerformed
+        ControladorUI.limpiarCamposCaso();
+    }//GEN-LAST:event_btnLimpiarCasoActionPerformed
+
+    private void btnCerrarCasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarCasoActionPerformed
+        ControladorUI.cerrarDialog(dialogCaso);
+    }//GEN-LAST:event_btnCerrarCasoActionPerformed
+
+    private void tblCasoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCasoMouseClicked
+        ControladorUI.tblMouseClickedCase();
+    }//GEN-LAST:event_tblCasoMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarC;
+    private javax.swing.JButton btnCerrarCaso;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnLimpiarCaso;
     private javax.swing.JButton btnRegistrarC;
+    private javax.swing.JComboBox<String> cbIDProyecto;
+    private javax.swing.JComboBox<String> cbIDTipoCaso;
     private javax.swing.JDialog dialogCaso;
     private javax.swing.JMenuItem itemCancelarCaso;
     private javax.swing.JMenuItem itemCrearCaso;
@@ -229,15 +399,13 @@ public class AdministradorProyectoUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenu menuCasoAP;
     private javax.swing.JMenu menuEtapaAP;
     private javax.swing.JMenu menuProyectosAP;
-    private javax.swing.JFormattedTextField txtFechaInicio;
-    private javax.swing.JFormattedTextField txtFechaLimite;
-    private javax.swing.JFormattedTextField txtIdCaso;
-    private javax.swing.JTextField txtIdProyecto;
+    private javax.swing.JTable tblCaso;
+    private javax.swing.JTextArea txtDescripcion;
+    private com.toedter.calendar.JDateChooser txtFechaInicio;
+    private com.toedter.calendar.JDateChooser txtFechaLimite;
     private javax.swing.JTextField txtNombreC;
     // End of variables declaration//GEN-END:variables
 }

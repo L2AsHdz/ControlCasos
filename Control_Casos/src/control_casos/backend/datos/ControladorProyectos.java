@@ -100,7 +100,8 @@ public class ControladorProyectos {
      public Proyecto leerProyectoFila(int id) {
        Proyecto p = new Proyecto();
         try {
-            String sql = "SELECT P.Id, P.Nombre, P.Estado, P.Descripcion, P.DPI_AdminP, U.Nombre FROM PROYECTO P JOIN USUARIO U ON P.DPI_AdminP=U.DPI WHERE Id = ?";
+            String sql = "SELECT P.Id, P.Nombre, P.Estado, P.Descripcion, P.DPI_AdminP, "
+                    + "U.Nombre FROM PROYECTO P JOIN USUARIO U ON P.DPI_AdminP=U.DPI WHERE Id = ?";
             PreparedStatement ps = CBD.conectar().prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();

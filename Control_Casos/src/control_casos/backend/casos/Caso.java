@@ -11,18 +11,23 @@ public class Caso {
     private Date fechaEntrega;
     private double porcentaje;
     private int estado;
+    private String estadoN;
     private String motivoCancelacion;
     private double horasInvertidas;
     private double costo;
     private int idProyecto;
+    private String nombreProyecto;
     private int idTipoCaso;
+    private String tipoCaso;
 
     public Caso() {
     }
 
-    public Caso(int id, String nombre, Date fechaInicio, Date fechaLimite, int estado, int idProyecto, int idTipoCaso) {
+    public Caso(int id, String nombre, String descripcion, Date fechaInicio, 
+            Date fechaLimite, int estado, int idProyecto, int idTipoCaso) {
         this.id = id;
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaLimite = fechaLimite;
         this.estado = estado;
@@ -78,6 +83,10 @@ public class Caso {
         this.fechaEntrega = fechaEntrega;
     }
 
+    public void setFechaEntrega(String fecha){
+        this.fechaEntrega = new Date(fecha);
+    }
+    
     public double getPorcentaje() {
         return porcentaje;
     }
@@ -92,6 +101,30 @@ public class Caso {
 
     public void setEstado(int estado) {
         this.estado = estado;
+    }
+
+    public String getEstadoN() {
+        return estadoN;
+    }
+
+    public void setEstadoN() {
+        switch (estado) {
+            case 1:
+                this.estadoN = "Activo";
+                break;
+            case 2:
+                this.estadoN = "Cancelado";
+                break;
+            case 3:
+                this.estadoN = "Con Retraso";
+                break;
+            case 4:
+                this.estadoN = "Congelado";
+                break;
+            case 5:
+                this.estadoN = "Finalizado";
+                break;
+        }
     }
 
     public String getMotivoCancelacion() {
@@ -126,12 +159,28 @@ public class Caso {
         this.idProyecto = idProyecto;
     }
 
+    public void setNombreProyecto(String nombreProyecto) {
+        this.nombreProyecto = nombreProyecto;
+    }
+
+    public String getNombreProyecto() {
+        return nombreProyecto;
+    }
+
     public int getIdTipoCaso() {
         return idTipoCaso;
     }
 
     public void setIdTipoCaso(int idTipoCaso) {
         this.idTipoCaso = idTipoCaso;
+    }
+
+    public void setTipoCaso(String tipoCaso) {
+        this.tipoCaso = tipoCaso;
+    }
+
+    public String getTipoCaso() {
+        return tipoCaso;
     }
     
     

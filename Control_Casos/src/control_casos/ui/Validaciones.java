@@ -1,5 +1,7 @@
 package control_casos.ui;
 
+import java.util.Date;
+
 public class Validaciones {
     public static String validarLogin(String nombre, String pass){
         String error = "";
@@ -43,6 +45,14 @@ public class Validaciones {
         if (!isNumeric) {
             error = "El dato no es numerico";
 
+        }
+        return error;
+    }
+    
+    public static String validarAgregarCaso(String nombre, int idP, int idTC, Date fechaI, Date fechaL){
+        String error = "";
+        if (nombre.isEmpty() || idP < 1 || idTC < 1) {
+            error = "No pueden haber campos vacios";
         }
         return error;
     }
