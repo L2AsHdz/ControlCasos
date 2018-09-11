@@ -14,8 +14,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class ControladorUI {
     private static String dpi2 = "";
-    private static int idTP = 0;
-    private static int idTP = 0;
+    private static int idP = 0;
+    private static int idTC = 0;
     private static Login log = new Login();
     private static AdministradorProyectoUI adminUI = new AdministradorProyectoUI();
     private static AdministradorSistemaUI adminSUI = new AdministradorSistemaUI();
@@ -55,7 +55,6 @@ public class ControladorUI {
                     
                 case 1:
                     log.dispose();
-                    //log.setVisible(false);
                     abrirJFrame(adminSUI);
                     break;
                 
@@ -216,7 +215,7 @@ public class ControladorUI {
     }
     
     public static void btnActualizarProject(){
-        int id = idTP;
+        int id = idP;
         int estado = 1;
         String nombre = adminSUI.getTxtNombreProyecto().getText();
         String descripcion = adminSUI.getTxtDescripcion().getText();
@@ -242,17 +241,20 @@ public class ControladorUI {
     
     public static void tblMouseClickedProject(){
         int fila = adminSUI.getTblProyectos().getSelectedRow();
-        idTP = Integer.parseInt(adminSUI.getTblProyectos().getValueAt(fila, 0).toString());
-        proyecto = controlProject.leerProyectoFila(idTP);
+        idP = Integer.parseInt(adminSUI.getTblProyectos().getValueAt(fila, 0).toString());
+        proyecto = controlProject.leerProyectoFila(idTC);
         adminSUI.getTxtNombreProyecto().setText(proyecto.getNombre());
         adminSUI.getTxtDescripcion().setText(proyecto.getDescripcion());
         adminSUI.getCbAdminP().setSelectedItem(proyecto.getDpiAdminP());
     }
     
     public static void btnEliminarProject(){
-        int x = JOptionPane.showConfirmDialog(null, "ESTAS SEGURO DE ELIMINAR ESTE RESGITRO?");
-        if (x == 0 && idTP > 0) {
-            if (controlProject.delete(idTP)) {
+        int x = -1;
+        if (idP > 0) {
+            x = JOptionPane.showConfirmDialog(null, "ESTAS SEGURO DE ELIMINAR ESTE RESGITRO?");
+        }
+        if (x == 0 && idP > 0) {
+            if (controlProject.delete(idP)) {
                 refrescarTablaProyecto();
                 JOptionPane.showMessageDialog(null, "Se elimino el registro", "Exito!", JOptionPane.INFORMATION_MESSAGE);
             }else {
@@ -303,7 +305,7 @@ public class ControladorUI {
     public static void itemAgregarTipoCaso(){
         refrescarTablaTipoCaso();
         limpiarCamposTipoCaso();
-        abrirJDialog(adminSUI.getDialogProyecto());
+        abrirJDialog(adminSUI.getDialogTipoCaso());
     }
     
     public static void btnAgregarTipoCaso(){
@@ -311,10 +313,10 @@ public class ControladorUI {
         int id = model.getRowCount()+1;
         String nombre = adminSUI.getTxtNombreTC().getText();
         String textoInt = adminSUI.getTxtCantEtapas().getText();
-        int cantidadEtapas = Integer.parseInt(textoInt);
         String acceso = Validaciones.validarAgregarTipoCaso(nombre, textoInt);
         
         if (acceso.equals("")) {
+            int cantidadEtapas = Integer.parseInt(textoInt);
             tipoCaso = new TipoCaso(id, nombre, cantidadEtapas);
             if (controlCaseType.create(tipoCaso)) {
                 limpiarCamposTipoCaso();
@@ -329,12 +331,13 @@ public class ControladorUI {
     }
     
     public static void btnActualizarTipoCaso(){
-        int id = idTP;
+        int id = idTC;
         String nombre = adminSUI.getTxtNombreTC().getText();
-        String textoInt = adminSUI.getTxtCantEtapas().getText();
-        int cantidadEtapas = Integer.parseInt(textoInt);
+        String textoInt = adminSUI.getTxtCantEtapas().getText().trim();
         String acceso = Validaciones.validarAgregarTipoCaso(nombre, textoInt);
+        
         if (acceso.equals("")) {
+            int cantidadEtapas = Integer.parseInt(textoInt);
             tipoCaso = new TipoCaso(id, nombre, cantidadEtapas);
             if (controlCaseType.actualizar(tipoCaso)) {
                 refrescarTablaTipoCaso();
@@ -350,19 +353,19 @@ public class ControladorUI {
     
     public static void tblMouseClickedTipoCaso(){
         int fila = adminSUI.getTblTipoCaso().getSelectedRow();
-        idTP = Integer.parseInt(adminSUI.getTblTipoCaso().getValueAt(fila, 0).toString());
-        tipoCaso = controlCaseType.leerTipoCasoFila(idTP);
+        idTC = Integer.parseInt(adminSUI.getTblTipoCaso().getValueAt(fila, 0).toString());
+        tipoCaso = controlCaseType.leerTipoCasoFila(idTC);
         adminSUI.getTxtNombreTC().setText(tipoCaso.getNombre());
         adminSUI.getTxtCantEtapas().setText(String.valueOf(tipoCaso.getCantidadEtapas()));
     }
     
     public static void btnEliminarTipoCaso(){
         int x = -1;
-        if (idTP > 0) {
+        if (idTC > 0) {
             x = JOptionPane.showConfirmDialog(null, "ESTAS SEGURO DE ELIMINAR ESTE RESGITRO?");
         }
-        if (x == 0 && idTP > 0) {
-            if (controlCaseType.delete(idTP)) {
+        if (x == 0 && idTC > 0) {
+            if (controlCaseType.delete(idTC)) {
                 refrescarTablaTipoCaso();
                 JOptionPane.showMessageDialog(null, "Se elimino el registro", "Exito!", JOptionPane.INFORMATION_MESSAGE);
             }else {
@@ -391,11 +394,11 @@ public class ControladorUI {
         }
         adminSUI.getTblTipoCaso().setModel(model);
     }
-    
     //---------------------FIN METODOS TIPO CASO-------------------------------/
     
     private static void abrirJFrame(JFrame jf){
         jf.setLocationRelativeTo(null);
+        jf.setExtendedState(JFrame.MAXIMIZED_BOTH);
         jf.setResizable(false);
         jf.setVisible(true);
     }
